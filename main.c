@@ -13,7 +13,7 @@
 static volatile uint8_t inCnt;
 static volatile struct cRGB inBuf[180];
 
-// softwar uart
+// software uart
 #else
 #include "softuart_gittins_avr/softuart.h"
 static uint8_t inCnt;
@@ -32,8 +32,8 @@ handleInput (uint8_t c)
       inCnt = 0;
     }
 
-  // color
   else if (c & 0xC0)
+  // color value
     {
       inBuf[inCnt].r = ((c & 0x30) >> 4) * 0x55;
       inBuf[inCnt].g = ((c & 0x0C) >> 2) * 0x55;
@@ -74,12 +74,15 @@ main (void)
   // main loop
   for (;;)
     {
+
+      // receive data by software uart
 #ifndef USART_RXC_vect
       if (softuart_kbhit ())
 	{
 	  handleInput (softuart_getchar ());
 	}
 #endif
+
     }
 
   return 0;
