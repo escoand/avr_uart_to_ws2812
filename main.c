@@ -33,8 +33,8 @@ handleInput (uint8_t c)
       sei ();
     }
 
-  else if (c & 0xC0)
   // color value
+  else if (c & 0x80)
     {
       inBuf[inCnt].r = ((c & 0x30) >> 4) * 0x55;
       inBuf[inCnt].g = ((c & 0x0C) >> 2) * 0x55;
