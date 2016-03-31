@@ -30,6 +30,7 @@ handleInput (uint8_t c)
     {
       ws2812_setleds (inBuf, inCnt);
       inCnt = 0;
+      sei ();
     }
 
   else if (c & 0xC0)
